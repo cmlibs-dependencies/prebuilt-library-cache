@@ -6,16 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  env:
-    LIBXML2_VERSION: 2.9.10
-    ZLIB_VERSION: 1.2.12
-
   zlib:
     uses: ./.github/workflows/build-library.yml
     with:
       library_name: zlib
       repo_url: https://github.com/cmlibs-dependencies/zlib.git
-      version: ${{ env.ZLIB_VERSION }}
+      version: '1.2.12'
 
   libxml2:
     needs: zlib
@@ -23,9 +19,9 @@ jobs:
     with:
       library_name: libxml2
       repo_url: https://github.com/cmlibs-dependencies/libxml2.git
-      version: ${{ env.LIBXML2_VERSION }}
+      version: '2.9.10'
       cmake_args: >-
-        -DZLIB_DIR=${{ github.workspace }}/zlib/zlib/lib/cmake/ZLIB-${{ env.ZLIB_VERSION }}
+        -DZLIB_DIR=${{ github.workspace }}/zlib/zlib/lib/cmake/ZLIB-1.2.12
         -DLIBXML2_WITH_DEBUG=OFF
         -DLIBXML2_WITH_ICONV=OFF
         -DLIBXML2_WITH_LEGACY=OFF
