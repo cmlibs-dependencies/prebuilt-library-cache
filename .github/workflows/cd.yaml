@@ -37,3 +37,14 @@ jobs:
       library_name: bzip2
       repo_url: https://github.com/cmlibs-dependencies/bzip2.git
       version: '1.0.6'
+
+  googletest:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: bzip2
+      repo_url: https://github.com/cmlibs-dependencies/googletest.git
+      version: '1.12.1'
+      cmake_args: |
+        -DBUILD_GMOCK=OFF
+        -DBUILD_GTEST=ON
+        -Dgtest_force_shared_crt=ON
