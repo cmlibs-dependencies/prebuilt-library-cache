@@ -5,11 +5,11 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-env:
-  LIBXML2_VERSION: 2.9.10
-  ZLIB_VERSION: 1.2.12
-
 jobs:
+  env:
+    LIBXML2_VERSION: 2.9.10
+    ZLIB_VERSION: 1.2.12
+
   zlib:
     uses: ./.github/workflows/build-library.yml
     with:
