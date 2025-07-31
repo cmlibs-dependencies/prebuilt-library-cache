@@ -1,0 +1,58 @@
+name: Build Library
+
+on:
+  workflow_call:
+    inputs:
+      library_name:
+        required: true
+        type: string
+      repo_url:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      cmake_args:
+        required: false
+        type: string
+      depends_on:
+        required: false
+        type: string
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: 'Linux'
+            os: ubuntu-latest
+            build_shared_libs: 'OFF'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install CMake and Ninja
+        uses: lukka/get-cmake@latest
+
+      - name: Set lib_type
+        id: set-lib-type
+        run: |
+          if [ "${{ matrix.build_shared_libs }}" = "ON" ]; then
+            echo "lib_type=Shared" >> $GITHUB_OUTPUT
+          else
+            echo "lib_type=Static" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout Library
+        run: |
+          git clone -b v${{ inputs.version }} --depth 1 ${{ inputs.repo_url }} ${{ inputs.library_name }}
+          cd ${{ inputs.library_name }}
+          cmake -G Ninja -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DCMAKE_INSTALL_PREFIX=${{ inputs.library_name }} \
+            -DBUILD_SHARED_LIBS=${{ matrix.build_shared_libs }} \
+            ${{ inputs.cmake_args }}
+          cmake --build build
+          cmake --install build
+          tar -czf ../${{ inputs.library_name }}-${{ matrix.name }}-${{ steps.set-lib-type.outputs.lib_type }}.tar.gz ${{ inputs.library_name }}
+
