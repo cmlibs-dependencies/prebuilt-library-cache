@@ -30,3 +30,10 @@ jobs:
         -DLIBXML2_WITH_PROGRAMS=OFF
         -DLIBXML2_WITH_PYTHON=OFF
         -DLIBXML2_WITH_TESTS=OFF
+
+  bzip2:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: bzip2
+      repo_url: https://github.com/cmlibs-dependencies/bzip2.git
+      version: '1.0.6'
