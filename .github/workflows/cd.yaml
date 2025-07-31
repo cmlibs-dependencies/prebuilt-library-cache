@@ -70,3 +70,19 @@ jobs:
         -DZLIB_VERSION="1.2.12"
         -DHDF5_BUILD_FORTRAN=OFF
         -DHDF5_BUILD_EXAMPLES=OFF
+
+  fieldml-api:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: fieldml-api
+      repo_url: https://github.com/cmlibs-dependencies/fieldml-api.git
+      version: '0.5.0'
+      cmake_args: |
+        -DBUILD_TESTS=OFF
+        -DLIBXML2_VERSION="2.9.10
+        -DUSE_HDF5=ON
+        -DHDF5_VERSION="1.12.0"
+        -DHDF5_WITH_MPI=OFF
+        -DHDF5_BUILD_TOOLS=OFF
+        -DJAVA_BINDINGS=OFF
+        -DFORTRAN_BINDINGS=OFF
