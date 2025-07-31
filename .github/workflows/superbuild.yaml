@@ -20,7 +20,7 @@ jobs:
 
       - name: Checkout Super Build
         run: |
-          git clone -b develop --depth 1 https://github.com/cmlibs/SuperBuild.git superbuild
+          git clone -b main --depth 1 https://github.com/cmlibs/SuperBuild.git superbuild
 
       - name: Prepare Super Build
         run: |
