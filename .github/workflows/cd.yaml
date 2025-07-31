@@ -53,5 +53,20 @@ jobs:
       version: '1.12.1'
       cmake_args: |
         -DBUILD_GMOCK=OFF
-        -DBUILD_GTEST=ON
         -Dgtest_force_shared_crt=ON
+
+  hdf5:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: hdf5
+      repo_url: https://github.com/cmlibs-dependencies/hdf5.git
+      version: '1.12.0'
+      cmake_args: |
+        -DBUILD_TESTS=OFF
+        -DCMLIBS_BUILD=ON
+        -DWITH_SZIP=ON
+        -DSZIP_VERSION="1.0.6"
+        -DWITH_ZLIB=ON
+        -DZLIB_VERSION="1.2.12"
+        -DHDF5_BUILD_FORTRAN=OFF
+        -DHDF5_BUILD_EXAMPLES=OFF
