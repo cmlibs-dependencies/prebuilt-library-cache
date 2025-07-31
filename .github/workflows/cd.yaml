@@ -59,7 +59,7 @@ jobs:
           ${{ matrix.emcmake }} cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_INSTALL_PREFIX=libxml2 -DZLIB_DIR=${{ github.workspace }}/zlib/zlib/lib/cmake/ZLIB-${{ env.ZLIB_VERSION }} -DBUILD_SHARED_LIBS=${{ matrix.build_shared_libs }} -DLIBXML2_WITH_DEBUG=OFF -DLIBXML2_WITH_ICONV=OFF -DLIBXML2_WITH_LEGACY=OFF -DLIBXML2_WITH_LZMA=OFF -DLIBXML2_WITH_MODULES=OFF -DLIBXML2_WITH_PROGRAMS=OFF -DLIBXML2_WITH_PYTHON=OFF -DLIBXML2_WITH_TESTS=OFF
           cmake --build build
           cmake --install build
-          tar -czf ../libxml2-${{ matrix.name }}.tar.gz libxml2
+          tar -czf ../libxml2-${{ matrix.name }}-${{ steps.set-lib-type.outputs.lib_type }}.tar.gz libxml2
       - name: Release libxml2 and zlib
         uses: softprops/action-gh-release@v2
         with:
