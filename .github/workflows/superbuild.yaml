@@ -1,0 +1,36 @@
+name: Super Build Library Cache Builder
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: 'Linux'
+            os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install CMake and Ninja
+        uses: lukka/get-cmake@latest
+
+      - name: Checkout Super Build
+        run: |
+          git clone -b develop --depth 1 https://github.com/cmlibs/SuperBuild.git superbuild
+
+      - name: Prepare Super Build
+        run: |
+          mkdir cmlibs
+
+      - name: Configure Super Build
+        run: |
+          cd superbuild
+          mkdir build
+          cmake -G Ninja -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DCMLIBS_ROOT="${{ github.workspace }}/cmlibs"
