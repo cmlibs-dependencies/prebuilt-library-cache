@@ -7,7 +7,7 @@ on:
 
 jobs:
   zlib:
-    uses: ./.github/workflows/build-library.yml
+    uses: ./.github/workflows/build-library.yaml
     with:
       library_name: zlib
       repo_url: https://github.com/cmlibs-dependencies/zlib.git
@@ -15,7 +15,7 @@ jobs:
 
   libxml2:
     needs: zlib
-    uses: ./.github/workflows/build-library.yml
+    uses: ./.github/workflows/build-library.yaml
     with:
       library_name: libxml2
       repo_url: https://github.com/cmlibs-dependencies/libxml2.git
