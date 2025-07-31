@@ -38,10 +38,17 @@ jobs:
       repo_url: https://github.com/cmlibs-dependencies/bzip2.git
       version: '1.0.6'
 
+  szip:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: szip
+      repo_url: https://github.com/cmlibs-dependencies/szip.git
+      version: '2.1'
+
   googletest:
     uses: ./.github/workflows/build-library.yaml
     with:
-      library_name: bzip2
+      library_name: googletest
       repo_url: https://github.com/cmlibs-dependencies/googletest.git
       version: '1.12.1'
       cmake_args: |
