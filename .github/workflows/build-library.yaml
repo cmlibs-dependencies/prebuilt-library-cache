@@ -32,6 +32,8 @@ jobs:
     steps:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "^3.25.0"
 
       - name: Set lib_type
         id: set-lib-type
