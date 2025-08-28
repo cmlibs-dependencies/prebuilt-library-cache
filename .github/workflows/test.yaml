@@ -17,6 +17,13 @@ jobs:
         -DBUILD_UTILS=OFF
         -DGLEW_USE_MESA=TRUE
 
+  zlib:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: zlib
+      repo_url: https://github.com/cmlibs-dependencies/zlib.git
+      version: '1.2.12'
+
   libxml2:
     needs: zlib
     uses: ./.github/workflows/build-library.yaml
