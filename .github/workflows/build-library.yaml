@@ -18,6 +18,11 @@ on:
       depends_on:
         required: false
         type: string
+      apt_packages:
+        description: 'A space-separated list of APT packages to install.'
+        required: false
+        type: string
+        default: ''
 
 jobs:
   build:
@@ -32,8 +37,13 @@ jobs:
     steps:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: "^3.25.0"
+
+      - name: Install APT dependencies
+        # This step will only run if the 'apt_packages' input is not empty
+        if: inputs.apt_packages != ''
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ${{ inputs.apt_packages }}
 
       - name: Set lib_type
         id: set-lib-type

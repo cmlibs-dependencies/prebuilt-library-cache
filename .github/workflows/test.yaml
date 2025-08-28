@@ -1,0 +1,105 @@
+name: Library Cache Builder
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  glew:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: glew
+      repo_url: https://github.com/cmlibs-dependencies/glew.git
+      version: 'develop'
+      apt_packages: 'libosmesa6-dev libgl1-mesa-dev libglu1-mesa-dev'
+      cmake_args: >-
+        -DBUILD_UTILS=OFF
+        -DGLEW_USE_MESA=TRUE
+
+  libxml2:
+    needs: zlib
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: libxml2
+      repo_url: https://github.com/cmlibs-dependencies/libxml2.git
+      version: '2.9.10'
+      cmake_args: >-
+        -DZLIB_DIR=${{ github.workspace }}/zlib/zlib/lib/cmake/ZLIB-1.2.12
+        -DLIBXML2_WITH_DEBUG=OFF
+        -DLIBXML2_WITH_ICONV=OFF
+        -DLIBXML2_WITH_LEGACY=OFF
+        -DLIBXML2_WITH_LZMA=OFF
+        -DLIBXML2_WITH_MODULES=OFF
+        -DLIBXML2_WITH_PROGRAMS=OFF
+        -DLIBXML2_WITH_PYTHON=OFF
+        -DLIBXML2_WITH_TESTS=OFF
+
+  bzip2:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: bzip2
+      repo_url: https://github.com/cmlibs-dependencies/bzip2.git
+      version: '1.0.6'
+
+  szip:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: szip
+      repo_url: https://github.com/cmlibs-dependencies/szip.git
+      version: '2.1'
+
+  googletest:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: googletest
+      repo_url: https://github.com/cmlibs-dependencies/googletest.git
+      version: '1.12.1'
+      cmake_args: >-
+        -DBUILD_GMOCK=OFF
+        -Dgtest_force_shared_crt=ON
+
+  hdf5:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: hdf5
+      repo_url: https://github.com/cmlibs-dependencies/hdf5.git
+      version: '1.12.0'
+      cmake_args: >-
+        -DBUILD_TESTS=OFF
+        -DCMLIBS_BUILD=ON
+        -DWITH_SZIP=ON
+        -DSZIP_VERSION="1.0.6"
+        -DWITH_ZLIB=ON
+        -DZLIB_VERSION="1.2.12"
+        -DHDF5_BUILD_FORTRAN=OFF
+        -DHDF5_BUILD_EXAMPLES=OFF
+
+  fieldml-api:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: fieldml-api
+      repo_url: https://github.com/cmlibs-dependencies/fieldml-api.git
+      version: '0.5.0'
+      cmake_args: >-
+        -DBUILD_TESTS=OFF
+        -DLIBXML2_VERSION="2.9.10"
+        -DUSE_HDF5=ON
+        -DHDF5_VERSION="1.12.0"
+        -DHDF5_WITH_MPI=OFF
+        -DHDF5_BUILD_TOOLS=OFF
+        -DJAVA_BINDINGS=OFF
+        -DFORTRAN_BINDINGS=OFF
+
+  jpeg:
+    uses: ./.github/workflows/build-library.yaml
+    with:
+      library_name: jpeg
+      repo_url: https://github.com/cmlibs-dependencies/jpeg.git
+      version: '9d'
+      cmake_args: >-
+        -DJPEG_BUILD_CJPEG=OFF
+        -DJPEG_BUILD_DJPEG=OFF
+        -DJPEG_BUILD_JPEGTRAN=OFF
+        -DJPEG_BUILD_RDJPGCOM=OFF
+        -DJPEG_BUILD_WRJPGCOM=OFF
