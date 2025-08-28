@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Requirements
         run: |
-          sudo apt install libgl1-mesa-dev
+          sudo apt install libosmesa6
 
       - name: Checkout Super Build
         run: |
