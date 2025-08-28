@@ -11,7 +11,7 @@ jobs:
     with:
       library_name: glew
       repo_url: https://github.com/cmlibs-dependencies/glew.git
-      version: 'develop'
+      version: '2.2.0'
       apt_packages: 'libosmesa6-dev libgl1-mesa-dev libglu1-mesa-dev'
       cmake_args: >-
         -DBUILD_UTILS=OFF
