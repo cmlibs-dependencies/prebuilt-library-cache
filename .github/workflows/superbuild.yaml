@@ -18,6 +18,10 @@ jobs:
       - name: Install CMake and Ninja
         uses: lukka/get-cmake@latest
 
+      - name: Install Requirements
+        run: |
+          sudo apt install libgl1-mesa-dev
+
       - name: Checkout Super Build
         run: |
           git clone -b main --depth 1 https://github.com/cmlibs/SuperBuild.git superbuild
