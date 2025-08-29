@@ -2,7 +2,7 @@ name: Library Cache Builder
 
 on:
   push:
-    branches: [ main ]
+    branches: [ mainx ]
   workflow_dispatch:
 
 jobs:

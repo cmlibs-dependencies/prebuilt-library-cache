@@ -2,7 +2,7 @@ name: Super Build Library Cache Builder
 
 on:
   push:
-    branches: [ mainx ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
