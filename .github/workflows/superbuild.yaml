@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: 'Linux'
+          - name: 'linux'
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -48,7 +48,7 @@ jobs:
 
       - name: Create Archive
         run: |
-          tar -czf superbuild-libs-${{ matrix.name }}.tar.gz -C ${{ github.workspace }}/cmlibs/install
+          tar -czf superbuild-osmesa-libs-${{ matrix.name }}.tar.gz -C ${{ github.workspace }}/cmlibs/
 
       - name: Add Archive to Cache
         uses: softprops/action-gh-release@v2
