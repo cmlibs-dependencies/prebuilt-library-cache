@@ -48,7 +48,7 @@ jobs:
 
       - name: Create Archive
         run: |
-          tar -czf superbuild-libs-${{ matrix.name }}.tar.gz cmlibs/install
+          tar -czf superbuild-libs-${{ matrix.name }}.tar.gz -C ${{ github.workspace }}/cmlibs/install
 
       - name: Add Archive to Cache
         uses: softprops/action-gh-release@v2
