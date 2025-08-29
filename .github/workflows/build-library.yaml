@@ -54,7 +54,7 @@ jobs:
             echo "lib_type=Static" >> $GITHUB_OUTPUT
           fi
 
-      - name: Checkout Library
+      - name: Create Archive of Library
         run: |
           git clone -b v${{ inputs.version }} --depth 1 ${{ inputs.repo_url }} ${{ inputs.library_name }}
           cd ${{ inputs.library_name }}
