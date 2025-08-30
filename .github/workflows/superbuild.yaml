@@ -28,7 +28,7 @@ jobs:
 
       - name: Prepare Super Build
         run: |
-          mkdir cmlibs
+          mkdir ${{ github.workspace }}/cmlibs
 
       - name: Configure Super Build
         run: |
@@ -48,7 +48,8 @@ jobs:
 
       - name: Create Archive
         run: |
-          tar -czf superbuild-osmesa-libs-${{ matrix.name }}.tar.gz -C ${{ github.workspace }}/cmlibs/
+          cd ${{ github.workspace }}/cmlibs
+          tar -czf superbuild-osmesa-libs-${{ matrix.name }}.tar.gz install
 
       - name: Add Archive to Cache
         uses: softprops/action-gh-release@v2
